@@ -1,10 +1,15 @@
 # Star Rating Component
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c48aa03f-7dc4-48db-82cf-0771afca7ca7/deploy-status)](https://app.netlify.com/sites/star-rating-component-by-yashi/deploys)
 
 ## Overview
 
 This project implements a simple and responsive star rating component that allows users to rate their experience with a product or service. The component displays a series of stars that users can click to select a rating between 1 and 5. Based on the selected rating, a corresponding feedback message is displayed to the user.
+
+## Live Demo
+
+You can check out the Live Demo of [Star Rating Component](https://star-rating-component-by-yashi.netlify.app)
 
 ## Preview
 
