@@ -1,48 +1,66 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const stars = document.querySelectorAll(".star");
-    const ratingTexts = document.querySelectorAll(".rating-text .text");
-    const ratingInput = document.getElementById("rating");
+const stars = document.querySelectorAll(".star");
+const feedbackMessage = document.querySelector(".feedback-message");
 
-    stars.forEach((star, index) => {
-        star.addEventListener("click", function() {
-            const value = star.getAttribute("data-value");
+const messages = [
+  "We're sorry to hear that you had a bad experience. We would like to learn more about what happened and how we can make things right.",
+  "We apologize for the inconvenience you experienced. We appreciate your feedback and would like to work with you to address any issues.",
+  "Thank you for your feedback. We're sorry to hear that your experience wasn't perfect. We would love to hear more about your concerns to see how we can improve.",
+  "Thank you for your positive feedback! We're glad to know that you had a great experience and we appreciate your support.",
+  "Excellent! We're thrilled to hear you had such a positive experience. Thank you for choosing our platform"
+];
 
-            // Toggle selected class for current star and deselect others
-            stars.forEach((s, i) => {
-                if (i <= index) {
-                    s.classList.add("selected");
-                } else {
-                    s.classList.remove("selected");
-                }
-            });
+let currentRating = 0; // Track the current rating
 
-            // Display corresponding rating text and hide others
-            ratingTexts.forEach((text, i) => {
-                if (i == index) {
-                    text.style.display = "inline-block";
-                } else {
-                    text.style.display = "none";
-                }
-            });
+stars.forEach((star) => {
+  star.addEventListener("click", () => {
+    const rating = parseInt(star.getAttribute("data-rating"));
+    // If clicking the same star again, toggle off
+    if (currentRating === rating) {
+      updateRating(0);
+    } else {
+      updateRating(rating);
+    }
+  });
 
-            ratingInput.value = value; // Update the hidden input value
-        });
+  star.addEventListener("mouseover", () => {
+    const rating = star.getAttribute("data-rating");
+    highlightStars(rating);
+  });
 
-        star.addEventListener("mouseover", function() {
-            const value = star.getAttribute("data-value");
-            // Highlight stars on hover
-            stars.forEach((s, i) => {
-                if (i < value) {
-                    s.classList.add("hovered");
-                } else {
-                    s.classList.remove("hovered");
-                }
-            });
-        });
-
-        star.addEventListener("mouseout", function() {
-            // Remove hover effect on mouseout
-            stars.forEach(s => s.classList.remove("hovered"));
-        });
-    });
+  star.addEventListener("mouseout", () => {
+    clearHighlight();
+  });
 });
+
+function updateRating(rating) {
+  currentRating = rating; // Update current rating
+  stars.forEach((star, index) => {
+    if (index < rating) {
+      star.classList.add("selected");
+    } else {
+      star.classList.remove("selected");
+    }
+  });
+  feedbackMessage.textContent = rating > 0 ? messages[rating - 1] : ""; // Clear message if rating is 0
+}
+
+function highlightStars(rating) {
+  stars.forEach((star, index) => {
+    if (index < rating) {
+      star.classList.add("hovered");
+    } else {
+      star.classList.remove("hovered");
+    }
+  });
+}
+
+function clearHighlight() {
+  stars.forEach((star, index) => {
+    // Only keep stars highlighted up to the current rating
+    if (index < currentRating) {
+      star.classList.add("selected");
+    } else {
+      star.classList.remove("selected", "hovered"); // Remove both selected and hovered classes
+    }
+  });
+}
