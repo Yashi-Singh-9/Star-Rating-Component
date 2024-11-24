@@ -41,13 +41,13 @@ To use this star rating component:
 1. Clone the repository to your local machine:
 
     ```bash
-    git clone https://gitlab.com/Yashi-Singh-9/star-rating-component.git
+    git clone https://github.com/Yashi-Singh-9/Star-Rating-Component.git
     ```
 
 2. Navigate to the project directory:
 
     ```bash
-    cd star-rating-component
+    cd Star-Rating-Component
     ```
 
 3. Open the `index.html` file in your web browser to see the star rating component in action.
